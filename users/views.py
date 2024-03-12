@@ -16,6 +16,7 @@ def login(request):
             if user:
                 auth.login(request, user)
                 messages.success(request, 'You are logged in')
+                
                 return HttpResponseRedirect(reverse('main:index'))
     else:
         form = UserLoginForm()
@@ -62,6 +63,7 @@ def profile(request):
     return render(request, 'users/profile.html', context=context)
 
 
+@login_required
 def logout(request):
     messages.success(request, 'You are logged out')
     auth.logout(request)

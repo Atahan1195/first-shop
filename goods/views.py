@@ -4,7 +4,7 @@ from .models import Category, Product
 from .utils import q_search
 
 
-def catalog(request, categories_slug=None):
+def catalog(request, categories_slug=None, categories_product=None):
 
     page = request.GET.get('page', 1)
     on_sale = request.GET.get('on_sale', None)

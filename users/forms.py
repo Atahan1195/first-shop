@@ -1,11 +1,16 @@
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from users.models import User
 
 
 class UserLoginForm(AuthenticationForm):
+
     username = forms.CharField()
     password = forms.CharField()
+
+    class Meta:
+        model = User
+        fields = ('username', 'password')
 
     # username = forms.CharField(widget=forms.TextInput(attrs={'autofocus': True,
     #                                                          'class': 'form-control',
@@ -14,12 +19,9 @@ class UserLoginForm(AuthenticationForm):
     #                                                              'class': 'form-control',
     #                                                              'placeholder': "Enter your password"}))
 
-    class Meta:
-        model = User
-        fields = ('username', 'password')
-
 
 class UserRegisterForm(UserCreationForm):
+
     name = forms.CharField()
     last_name = forms.CharField()
     username = forms.CharField()
@@ -45,7 +47,6 @@ class UserRegisterForm(UserCreationForm):
             user.save()
         return user
 
-
     # name = forms.CharField(widget=forms.TextInput(attrs={'autofocus': True,
     #                                                     'class': 'form-control',
     #                                                     'placeholder': 'Enter name'}))
@@ -63,4 +64,16 @@ class UserRegisterForm(UserCreationForm):
     # password2 = forms.CharField(widget=forms.PasswordInput(attrs={'autocomplete': 'new-password',
     #                                                              'class': 'form-control',
     #                                                              'placeholder': 'Enter password again'}))
+
+
+class ProfileForm(UserChangeForm):
+
+    name = forms.CharField()
+    last_name = forms.CharField()
+    username = forms.CharField()
+    email = forms.EmailField()
+
+    class Meta:
+        model = User
+        fields = ['name', 'last_name', 'username', 'email']
 

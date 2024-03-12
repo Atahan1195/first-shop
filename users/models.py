@@ -3,7 +3,7 @@ from django.db import models
 
 
 class User(AbstractUser):
-    photo = models.ImageField(upload_to='users/', null=True, blank=True)
+
     name = models.CharField(max_length=255, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

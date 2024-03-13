@@ -15,6 +15,7 @@ class CartQuerySet(models.QuerySet):
 
 
 class Cart(models.Model):
+
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='user', blank=True, null=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='product')
     quantity = models.PositiveSmallIntegerField(default=0, verbose_name='quantity')

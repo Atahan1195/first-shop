@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load carts_tags %}
 
 {% block content %}
 <div class="row">
@@ -65,25 +66,30 @@
                                     {% endif %}
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-dark">Сохранить</button>
+                        <button type="submit" class="btn btn-dark">Save</button>
                     </form>
                 </div>
             </div>
             <!-- Корзина -->
+            {% user_carts request as carts %}
+
             <div class="col-md-7">
                 <div class=" bg-white p-4 mb-4 mx-2 rounded custom-shadow">
-                    <h3 class="text-center mb-4">Корзина</h3>
+                    <h3 class="text-center mb-4">Shopping cart</h3>
                     <div class="container" id="cart-items-container">
                         <!-- Разметка корзины -->
                         {% include "includes/included_cart.html" %}
                         <!-- Закончилась разметка корзины -->
                     </div>
+                    <a class="btn btn-dark" href="orders/create_order.html">
+                    Place an order
+                </a>
                 </div>
             </div>
             <!-- Оформленные заказы -->
             <div class="col-md-12">
                 <div class=" bg-white p-4 mb-4 mx-2 rounded custom-shadow">
-                    <h3 class="text-center mb-4">Мои заказы</h3>
+                    <h3 class="text-center mb-4">My orders</h3>
                     <!-- Разметка заказов -->
                     <div class="container">
                         <div class="accordion" id="accordionExample">

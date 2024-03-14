@@ -13,6 +13,7 @@ class Category(models.Model):
 
 
 class Product(models.Model):
+
     slug = models.SlugField(max_length=100, unique=True)
     catalog = models.ForeignKey(Category, on_delete=models.CASCADE)
     name = models.CharField(max_length=100, unique=True)

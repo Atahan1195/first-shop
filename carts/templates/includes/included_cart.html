@@ -10,16 +10,19 @@
                 <div class="row text-center">
                     <div class="col p-0">
                         <div class="input-group">
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-dark btn-sm decrement"
-                                    data-cart-id="" data-cart-change-url="">-</button>
-                            </span>
-                                <input type="text" class="form-control number" value="{{ cart.quantity }}"
-                                    readonly>
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-dark btn-sm increment"
-                                    data-cart-id="" data-cart-change-url="">+</button>
-                            </span>
+                            <form method="POST" action="{% url 'carts:change' cart.product.slug %}" class="cart-form">
+                                {% csrf_token %}
+                                <input type="hidden" name="cart_id" value="{{ cart.id }}">
+                                <div class="input-group">
+                                    <span class="input-group-btn">
+                                        <button name="action" type="submit" value="decrement" class="btn btn-dark btn-sm">-</button>
+                                    </span>
+                                    <input type="text" class="form-control number" value="{{ cart.quantity }}" readonly>
+                                    <span class="input-group-btn">
+                                        <button name="action" type="submit" value="increment" class="btn btn-dark btn-sm">+</button>
+                                    </span>
+                                </div>
+                            </form>
                         </div>
                     </div>
                     <div class="col p-0">

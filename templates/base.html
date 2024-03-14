@@ -58,7 +58,7 @@
                                     My profile
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item  text-white" href="carts/cart.html">Shopping Cart</a></li>
+                                    <li><a class="dropdown-item  text-white" href="{% url 'user:users_cart' %}">Shopping Cart</a></li>
                                     <li><a class="dropdown-item  text-white" href="{% url 'user:profile' %}">Personal Cabinet</a>
                                     </li>
                                     {% if user.groups.all.0.name == 'manager' or user.is_staff %}

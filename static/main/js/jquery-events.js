@@ -6,7 +6,7 @@ $(document).ready(function () {
     if (notification.length > 0) {
         setTimeout(function () {
             notification.alert('close');
-        }, 1000);
+        }, 7000);
     }
 
     // При клике по значку корзины открываем всплывающее(модальное) окно
@@ -33,3 +33,4 @@ $(document).ready(function () {
     });
 
 });
+

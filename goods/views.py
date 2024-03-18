@@ -4,19 +4,19 @@ from .models import Category, Product
 from .utils import q_search
 
 
-def catalog(request, categories_slug=None, categories_product=None):
+def catalog(request, category_slug=None):
 
     page = request.GET.get('page', 1)
     on_sale = request.GET.get('on_sale', None)
     order_by = request.GET.get('order_by', None)
     query = request.GET.get('q', None)
 
-    if categories_slug == 'all':
+    if category_slug == 'all':
         goods = Product.objects.all()
     elif query:
         goods = q_search(query)
     else:
-        goods = get_list_or_404(Product.objects.filter(catalog__slug=categories_slug))
+        goods = get_list_or_404(Product.objects.filter(category__slug=category_slug))
 
     if on_sale:
         goods = goods.filter(discount__gt=0)
@@ -30,7 +30,7 @@ def catalog(request, categories_slug=None, categories_product=None):
     context = {
         'title': 'Home - Catalog',
         'goods': current_page,
-        'slag_url': categories_slug
+        'slag_url': category_slug
     }
     return render(request, 'goods/catalog.html', context)
 

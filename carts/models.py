@@ -19,7 +19,7 @@ class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='user', blank=True, null=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='product')
     quantity = models.PositiveSmallIntegerField(default=0, verbose_name='quantity')
-    session_key = models.CharField(max_length=100, blank=True, null=True)
+    session_key = models.CharField(max_length=32, blank=True, null=True)
     created_timestamp = models.DateTimeField(auto_now_add=True, verbose_name='created at')
 
     class Meta:
@@ -27,11 +27,11 @@ class Cart(models.Model):
         verbose_name = 'Cart'
         verbose_name_plural = 'Carts'
 
-    objects = CartQuerySet.as_manager()
+    objects = CartQuerySet().as_manager()
 
     def products_price(self):
         return round(self.product.total_price() * self.quantity, 2)
 
     def __str__(self):
-        return f'{self.user.username}\'s cart'
+        return f'Shopping Cart {self.user.username}, | Product {self.product.name} | Quantity {self.quantity}'
 

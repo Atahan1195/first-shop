@@ -10,18 +10,20 @@
                 <div class="row text-center">
                     <div class="col p-0">
                         <div class="input-group">
-                            <form method="POST" action="{% url 'carts:change' cart.product.slug %}" class="cart-form">
-                                {% csrf_token %}
-                                <div class="input-group">
-                                    <span class="input-group-btn">
-                                        <button name="action" type="submit" value="decrement" class="btn btn-dark btn-sm">-</button>
-                                    </span>
-                                    <input type="text" class="form-control number" value="{{ cart.quantity }}" readonly>
-                                    <span class="input-group-btn">
-                                        <button name="action" type="submit" value="increment" class="btn btn-dark btn-sm">+</button>
-                                    </span>
-                                </div>
-                            </form>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-dark btn-sm decrement"
+                                        data-cart-id="{{ cart.id }}" data-cart-change-url="{% url 'cart:change' %}">
+                                    {% csrf_token %}
+                                    -</button>
+                            </span>
+                            <input type="text" class="form-control number" value="{{ cart.quantity }}"
+                                   readonly>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-dark btn-sm increment"
+                                        data-cart-id="{{ cart.id }}" data-cart-change-url="{% url 'cart:change' %}">
+                                    {% csrf_token %}
+                                    +</button>
+                            </span>
                         </div>
                     </div>
                     <div class="col p-0">
@@ -29,7 +31,8 @@
                     </div>
                     <div class="col p-0"><strong>{{ cart.products_price }} $</strong></div>
                     <div class="col p-0">
-                        <a href="{% url 'cart:remove' cart.id %}" class="remove-from-cart" data-cart-id="{{ cart.id }}">
+                        <a href="{% url 'cart:remove' %}" class="remove-from-cart" data-cart-id="{{ cart.id }}">
+                            {% csrf_token %}
                             <img class="mx-1" src='{% static "main/icons/trash3-fill.svg" %}' alt="Catalog Icon" width="16" height="16">
                         </a>
                     </div>
@@ -46,28 +49,28 @@
 </div>
 
 
-<script>
-    document.querySelectorAll('.remove-from-cart').forEach(item => {
-        item.addEventListener('click', event => {
-            event.preventDefault();
-            const url = item.getAttribute('href');
-            fetch(url, {
-                method: 'GET',
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'X-CSRFToken': '{{ csrf_token }}'
-                }
-            })
-            .then(response => {
-                if (response.ok) {
-                    location.reload(); // Перезагружаем страницу после успешного удаления
-                } else {
-                    console.error('Ошибка удаления элемента из корзины');
-                }
-            })
-            .catch(error => {
-                console.error('Ошибка удаления элемента из корзины:', error);
-            });
-        });
-    });
-</script>
+{#<script>#}
+{#    document.querySelectorAll('.remove-from-cart').forEach(item => {#}
+{#        item.addEventListener('click', event => {#}
+{#            event.preventDefault();#}
+{#            const url = item.getAttribute('href');#}
+{#            fetch(url, {#}
+{#                method: 'GET',#}
+{#                headers: {#}
+{#                    'X-Requested-With': 'XMLHttpRequest',#}
+{#                    'X-CSRFToken': '{{ csrf_token }}'#}
+{#                }#}
+{#            })#}
+{#            .then(response => {#}
+{#                if (response.ok) {#}
+{#                    location.reload(); // Перезагружаем страницу после успешного удаления#}
+{#                } else {#}
+{#                    console.error('Ошибка удаления элемента из корзины');#}
+{#                }#}
+{#            })#}
+{#            .catch(error => {#}
+{#                console.error('Ошибка удаления элемента из корзины:', error);#}
+{#            });#}
+{#        });#}
+{#    });#}
+{#</script>#}

@@ -1,12 +1,15 @@
-from django.shortcuts import redirect, get_object_or_404
+from django.http import JsonResponse
+from django.template.loader import render_to_string
 
 from goods.models import Product
 from .models import Cart
+from .utils import get_user_carts
 
 
-def cart_add(request, product_slug):
+def cart_add(request):
 
-    product = Product.objects.get(slug=product_slug)
+    product_id = request.POST.get('product_id')
+    product = Product.objects.get(id=product_id)
 
     if request.user.is_authenticated:
         carts = Cart.objects.filter(user=request.user, product=product)
@@ -31,45 +34,54 @@ def cart_add(request, product_slug):
         else:
             Cart.objects.create(session_key=request.session.session_key, product=product, quantity=1)
 
-    return redirect(request.META['HTTP_REFERER'])
+    user_cart = get_user_carts(request)
+    cart_items_html = render_to_string('includes/included_cart.html', {"carts": user_cart}, request=request)
+
+    response_data = {
+        "message": "Item added to cart",
+        "cart_items_html": cart_items_html,
+    }
+
+    return JsonResponse(response_data)
 
 
-def cart_remove(request, cart_id):
+def cart_remove(request):
+
+    cart_id = request.POST.get('cart_id')
 
     cart = Cart.objects.get(id=cart_id)
+    quantity = cart.quantity
     cart.delete()
-    return redirect(request.META['HTTP_REFERER'])
+
+    user_cart = get_user_carts(request)
+    cart_items_html = render_to_string('includes/included_cart.html', {"carts": user_cart}, request=request)
+
+    response_data = {
+        "message": "Item removed from cart",
+        "cart_items_html": cart_items_html,
+        "quantity_deleted": quantity,
+    }
+
+    return JsonResponse(response_data)
 
 
-def cart_change(request, product_slug):
+def cart_change(request):
+    cart_id = request.POST.get('cart_id')
+    quantity = request.POST.get('quantity')
 
-    product = Product.objects.get(slug=product_slug)
+    cart = Cart.objects.get(id=cart_id)
 
-    if request.user.is_authenticated:
-        cart = Cart.objects.get(user=request.user, product=product)
+    cart.quantity = quantity
+    cart.save()
+    updated_quantity = cart.quantity
 
-        if 'action' in request.POST:
-            action = request.POST['action']
+    cart = get_user_carts(request)
+    cart_items_html = render_to_string('includes/included_cart.html', {"carts": cart}, request=request)
 
-            if action == 'increment':
-                cart.quantity += 1
-            elif action == 'decrement':
-                if cart.quantity > 1:
-                    cart.quantity -= 1
-            cart.save()
-    else:
-        if not request.session.session_key:
-            request.session.create()
-        cart = Cart.objects.get(session_key=request.session.session_key, product=product)
+    response_data = {
+        "message": "Cart updated",
+        "cart_items_html": cart_items_html,
+        "quantity": updated_quantity,
+    }
 
-        if 'action' in request.POST:
-            action = request.POST['action']
-
-            if action == 'increment':
-                cart.quantity += 1
-            elif action == 'decrement':
-                if cart.quantity > 1:
-                    cart.quantity -= 1
-            cart.save()
-
-    return redirect(request.META['HTTP_REFERER'])
+    return JsonResponse(response_data)

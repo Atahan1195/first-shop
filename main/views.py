@@ -1,6 +1,5 @@
-from django.http import HttpResponse
 from django.shortcuts import render
-from goods.models import Category, Product
+from .models import About
 
 
 def index(request):
@@ -13,10 +12,12 @@ def index(request):
 
 
 def about(request):
-    context: dict = {
+
+    about_all = About.objects.all()
+
+    context = {
         'title': 'Home - About',
         'content': 'About us.',
-        'text_on_page': 'This is a furniture store "HOME". We have a wide range of furniture for every taste. '
-                        'We are waiting for you in our store.'
+        'about_all': about_all,
     }
     return render(request, 'main/about.html', context)

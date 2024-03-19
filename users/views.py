@@ -11,6 +11,13 @@ from users.forms import UserLoginForm, UserRegisterForm, ProfileForm
 
 
 def login(request):
+
+    """
+    It is used to authenticate the user. It is used to login the user. It is used to redirect the user to the next page.
+    :param request: request
+    :return: render
+    """
+
     if request.method == 'POST':
         form = UserLoginForm(data=request.POST)
         if form.is_valid():
@@ -43,6 +50,13 @@ def login(request):
 
 
 def register(request):
+
+    """
+    It is used to register the user. It is used to create a new user. It is used to redirect the user to the next page.
+    :param request: request
+    :return: render
+    """
+
     if request.method == 'POST':
         form = UserRegisterForm(data=request.POST)
         if form.is_valid():
@@ -68,6 +82,13 @@ def register(request):
 
 @login_required
 def profile(request):
+
+    """
+    It is used to display the user profile. It is used to update the user profile. It is used to display the user orders
+    :param request: request
+    :return: render
+    """
+
     if request.method == 'POST':
         form = ProfileForm(data=request.POST, instance=request.user, files=request.FILES)
         if form.is_valid():
@@ -95,6 +116,13 @@ def profile(request):
 
 @login_required
 def logout(request):
+
+    """
+    It is used to logout the user. It is used to redirect the user to the main page.
+    :param request: request
+    :return: HttpResponseRedirect
+    """
+
     messages.success(request, 'You are logged out')
     auth.logout(request)
     return HttpResponseRedirect(reverse('main:index'))

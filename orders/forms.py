@@ -5,6 +5,12 @@ from django import forms
 
 class CreateOrderForm(forms.Form):
 
+    """
+    This form is used to create an order.
+    It includes the following fields: name, last_name, phone_number, requires_delivery,
+     delivery_address, and payment_on_get.
+    """
+
     name = forms.CharField()
     last_name = forms.CharField()
     phone_number = forms.CharField()
@@ -13,6 +19,13 @@ class CreateOrderForm(forms.Form):
     payment_on_get = forms.ChoiceField(choices=[("0", 'False'), ("1", 'True')])
 
     def clean_phone_number(self):
+
+        """
+        This method is used to clean the phone_number field.
+        It includes the following fields: data, pattern, and raise forms.ValidationError.
+        :return: data
+        """
+
         data = self.cleaned_data['phone_number']
 
         if not data.isdigit():

@@ -4,6 +4,11 @@ from .models import About
 
 def index(request):
 
+    """
+    This view returns the main page of the website.
+    It includes the following context: title and content.
+    """
+
     context: dict = {
         'title': 'Home - Main',
         'content': 'Furniture Store "AYLIN"',
@@ -12,6 +17,11 @@ def index(request):
 
 
 def about(request):
+
+    """
+    This view returns the about page of the website.
+    It includes the following context: title, content, and about_all.
+    """
 
     about_all = About.objects.all()
 

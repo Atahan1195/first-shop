@@ -12,6 +12,11 @@ from orders.models import Order, OrderItem
 @login_required
 def create_order(request):
 
+    """
+    This view is used to create an order.
+     It includes the following context: title, form, and order.
+    """
+
     if request.method == 'POST':
         form = CreateOrderForm(request.POST)
         if form.is_valid():

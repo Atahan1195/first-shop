@@ -3,6 +3,10 @@ from django.db import models
 
 class OrderItemQuerySet(models.QuerySet):
 
+    """
+    This class is used to calculate the total price and quantity of the products in the order.
+    """
+
     def total_price(self):
         return sum(cart.products_price() for cart in self)
 
@@ -13,6 +17,13 @@ class OrderItemQuerySet(models.QuerySet):
 
 
 class Order(models.Model):
+
+    """
+    This model holds information about the order.
+    It includes the following fields: user, created_timestamp, phone_number, requires_delivery, delivery_address,
+    payment_on_get, is_paid, and status.
+    """
+
     user = models.ForeignKey('users.User', on_delete=models.SET_DEFAULT, blank=True, null=True,
                              default=None, verbose_name='User')
     created_timestamp = models.DateTimeField(auto_now_add=True, verbose_name='Created timestamp')
@@ -33,6 +44,12 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
+
+    """
+    This model holds information about the order item.
+    It includes the following fields: order, product, name, price, quantity, and created_timestamp.
+    """
+
     order = models.ForeignKey('Order', on_delete=models.CASCADE, verbose_name='Order')
     product = models.ForeignKey('goods.Product', on_delete=models.SET_DEFAULT, null=True,
                                 verbose_name='Product', default=None)
@@ -49,6 +66,10 @@ class OrderItem(models.Model):
     objects = OrderItemQuerySet.as_manager()
 
     def products_price(self):
+        """
+        This method is used to calculate the total price of the products in the order item.
+        :return: round
+        """
         return round(self.product.total_price() * self.quantity, 2)
 
     def __str__(self):

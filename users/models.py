@@ -8,6 +8,7 @@ class User(AbstractUser):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_visible = models.BooleanField(default=True)
+    phone_number = models.CharField(max_length=20, null=True, blank=True)
 
     class Meta:
         db_table = 'users'

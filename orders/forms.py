@@ -1,0 +1,42 @@
+import re
+
+from django import forms
+
+
+class CreateOrderForm(forms.Form):
+
+    name = forms.CharField()
+    last_name = forms.CharField()
+    phone_number = forms.CharField()
+    requires_delivery = forms.ChoiceField(choices=[("0", 'False'), ("1", 'True')])
+    delivery_address = forms.CharField(required=False)
+    payment_on_get = forms.ChoiceField(choices=[("0", 'False'), ("1", 'True')])
+
+    def clean_phone_number(self):
+        data = self.cleaned_data['phone_number']
+
+        if not data.isdigit():
+            raise forms.ValidationError('Phone number must contain only digits')
+
+        pattern = re.compile(r'^\d{10}$')
+        if not pattern.match(data):
+            raise forms.ValidationError('Phone number must contain 10 digits')
+
+        return data
+
+
+
+
+    # first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First name'}))
+    #
+    # last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last name'}))
+    #
+    # phone_number = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone number'}))
+    #
+    # requires_delivery = forms.ChoiceField(widget=forms.RadioSelect(), choices=[(True, '1'), (False, '0')], initial=False)
+    #
+    # delivery_address = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'id': 'delivery_address',
+    #                                                                 'rows': 2,  'placeholder': 'Delivery address'}),
+    #                                    required=False)
+    #
+    # payment_on_get = forms.ChoiceField(widget=forms.RadioSelect(), choices=[(True, '1'), (False, '0')], initial=False)

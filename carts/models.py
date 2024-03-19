@@ -21,6 +21,7 @@ class Cart(models.Model):
     quantity = models.PositiveSmallIntegerField(default=0, verbose_name='quantity')
     session_key = models.CharField(max_length=32, blank=True, null=True)
     created_timestamp = models.DateTimeField(auto_now_add=True, verbose_name='created at')
+    phone_number = models.CharField(max_length=20, null=True, blank=True)
 
     class Meta:
         db_table = 'cart'
@@ -33,5 +34,8 @@ class Cart(models.Model):
         return round(self.product.total_price() * self.quantity, 2)
 
     def __str__(self):
-        return f'Shopping Cart {self.user.username}, | Product {self.product.name} | Quantity {self.quantity}'
+        if self.user:
+            return f'Shopping Cart {self.user.username}, | Product {self.product.name} | Quantity {self.quantity}'
+
+        return f'Anonymous Shopping Cart {self.user.username}, | Product {self.product.name} | Quantity {self.quantity}'
 

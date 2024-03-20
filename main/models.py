@@ -9,10 +9,12 @@ class About(models.Model):
     """
 
     about = models.TextField(blank=True, null=True)
-    address = models.CharField(blank=True, null=True, max_length=255)
     phone = models.CharField(max_length=255)
+    address = models.URLField(blank=True, null=True)
+    facebook = models.URLField(blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
-    telegram = models.CharField(max_length=255)
+    instagram = models.URLField(blank=True, null=True)
+    telegram = models.URLField(blank=True, null=True)
 
 
 

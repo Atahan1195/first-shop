@@ -1,13 +1,1 @@
-[
-  {
-    "model": "main.about",
-    "pk": 1,
-    "fields": {
-      "about": "This is a furniture store \"AYLIN\". We have a wide range of furniture for every taste. Our company has been operating since 2000. We are waiting for you in our store.",
-      "address": "New York, Broadway 123",
-      "phone": "+995 557 22 86 38",
-      "email": "atahan11951195@gmail.com",
-      "telegram": "@Tohan_toha"
-    }
-  }
-]
+[{"model": "main.about", "pk": 2, "fields": {"about": "This is a furniture store \"AYLIN\". We have a wide range of furniture for every taste. Our company has been operating since 2000. We are waiting for you in our store.", "phone": "+995 557 22 86 38", "address": "https://maps.app.goo.gl/YFipxWFzbuTnxcX7A", "facebook": "https://www.facebook.com/profile.php?id=100087174594098&mibextid=ZbWKwL", "email": "atahan11951195@gmail.com", "instagram": "https://www.instagram.com/tohan_toha?igsh=MWJ0NmJ6Mnpwdzl6aQ==", "telegram": "https://t.me/Tohan_toha"}}]

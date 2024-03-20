@@ -1,2 +1,2 @@
-web: gunicorn first-project-shop.wsgi --log-file - --log-level debug
+web: gunicorn shop.wsgi --log-file - --log-level debug
 

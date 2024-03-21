@@ -11,7 +11,7 @@ class About(models.Model):
     about = models.TextField(blank=True, null=True, max_length=255)
     phone = models.CharField(max_length=255, blank=True, null=True)
     address = models.URLField(blank=True, null=True, max_length=255)
-    # facebook = models.URLField(blank=True, null=True, max_length=255)
+    facebook = models.URLField(blank=True, null=True, max_length=255)
     email = models.EmailField(blank=True, null=True, max_length=255)
     instagram = models.URLField(blank=True, null=True, max_length=255)
     telegram = models.URLField(blank=True, null=True, max_length=255)

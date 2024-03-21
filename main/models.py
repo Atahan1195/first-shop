@@ -1,4 +1,5 @@
 from django.db import models
+from ckeditor.fields import RichTextField
 
 
 class About(models.Model):
@@ -8,13 +9,7 @@ class About(models.Model):
     It includes the following fields: about, address, phone, email, facebook, instagram, and telegram.
     """
 
-    about = models.TextField(blank=True, max_length=255)
-    phone = models.CharField(max_length=255, blank=True)
-    address = models.URLField(blank=True, max_length=255)
-    facebook = models.URLField(blank=True, max_length=255)
-    email = models.EmailField(blank=True, max_length=255)
-    instagram = models.URLField(blank=True, max_length=255)
-    telegram = models.URLField(blank=True, max_length=255)
+    about = RichTextField()
 
     class Meta:
         verbose_name_plural = 'About'

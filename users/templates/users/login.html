@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load socialaccount %}
 {% load static %}
 
 {% block model_cart %}
@@ -38,7 +39,7 @@
                 <hr>
 {#                <div class="text-center">#}
 {#                    <p>You can log in:</p>#}
-{#                    <a href="#" class="btn btn-dark">#}
+{#                    <a href="{% provider_login_url 'google' %}" class="btn btn-dark">#}
 {#                        <img class="mx-1" src="{% static 'main/icons/google.svg' %}" alt="Catalog Icon" width="16" height="16">#}
 {#                        Google#}
 {#                    </a>#}

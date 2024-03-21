@@ -7,6 +7,7 @@ class About(models.Model):
     about = models.TextField(max_length=200, blank=True, null=True)
     address = models.URLField(max_length=200, blank=True, null=True)
     telegram = models.URLField(max_length=200, blank=True, null=True)
+    instagram = models.URLField(max_length=200, blank=True, null=True)
 
     class Meta:
         verbose_name_plural = 'About'

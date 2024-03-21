@@ -50,23 +50,3 @@ body {
     color: #333;
     transition: all 0.3s ease;
 }
-
-
-
-
-
-
-
-.btn:hover {
-    background-color: #ccc;
-}
-
-/* Устанавливаем отступы для кнопок */
-.btn p {
-    margin: 0;
-}
-
-/* Устанавливаем стили для иконок в кнопках */
-.btn img {
-    vertical-align: middle;
-}

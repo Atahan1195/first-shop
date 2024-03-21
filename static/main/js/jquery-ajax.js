@@ -208,11 +208,4 @@ $(document).ready(function () {
         }
     });
 
-
-
-    // При нажатии на кнопки с классом "btn" скрываем текст кнопки
-    $('.btn').click(function(){
-        $(this).children('p').toggle();
-    });
-
 });

@@ -28,6 +28,6 @@ def about(request):
     context = {
         'title': 'Home - About',
         'content': 'About us.',
-        'about': about_all,
+        'about_all': about_all,
     }
     return render(request, 'main/about.html', context)

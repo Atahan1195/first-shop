@@ -15,16 +15,16 @@
         <h2 class="m-2"><strong>{{ content }}</strong></h2>
         <p class="m-2">{{ about.about }}</p>
 
-{#        <a href="tel:{{ about.phone }}" class="btn btn-white">#}
-{#            <img class="mx-1" src="{% static 'main/icons/phone12.svg' %}" alt="Catalog Icon" width="30" height="30">#}
-{#            <p class="m-2">Phone Number</p>#}
-{#        </a>#}
-{##}
-{#        <a href="{{ about.address }}" class="btn btn-white">#}
-{#            <img class="mx-1" src="{% static 'main/icons/location.svg' %}" alt="Catalog Icon" width="30" height="30">#}
-{#            <p class="m-2">Address</p>#}
-{#        </a>#}
-{##}
+        <a href="tel:{{ about.phone }}" class="btn btn-white">
+            <img class="mx-1" src="{% static 'main/icons/phone12.svg' %}" alt="Catalog Icon" width="30" height="30">
+            <p class="m-2">Phone Number</p>
+        </a>
+
+        <a href="{{ about.address }}" class="btn btn-white">
+            <img class="mx-1" src="{% static 'main/icons/location.svg' %}" alt="Catalog Icon" width="30" height="30">
+            <p class="m-2">Address</p>
+        </a>
+
 {#        <a href="{{ about.facebook }}" class="btn btn-white">#}
 {#            <img class="mx-1" src="{% static 'main/icons/facebook.svg' %}" alt="Catalog Icon" width="30" height="30">#}
 {#            <p class="m-2">Facebook</p>#}

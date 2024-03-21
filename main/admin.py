@@ -4,7 +4,7 @@ from .models import About
 
 @admin.register(About)
 class AboutAdmin(admin.ModelAdmin):
-    list_display = ('about',)
+    list_display = ('phone',)
 
 
 

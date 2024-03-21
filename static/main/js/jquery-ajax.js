@@ -207,4 +207,12 @@ $(document).ready(function () {
             $("#deliveryAddressField").hide();
         }
     });
+
+
+
+    // При нажатии на кнопки с классом "btn" скрываем текст кнопки
+    $('.btn').click(function(){
+        $(this).children('p').toggle();
+    });
+
 });

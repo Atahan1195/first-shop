@@ -12,7 +12,7 @@
 {% block content %}
     <div class="mt-5 pt-5 bg-white custom-shadow rounded">
     {% for about in about_all %}
-        <h2 class="m-2"><strong>{{ content }}</strong></h2>
+        <h2 class="m-2"><strong>ABOUT US</strong></h2>
         <p class="m-2">{{ about.about }}</p>
 
         <a href="tel:{{ about.phone }}" class="btn btn-white">
@@ -25,10 +25,10 @@
             <p class="m-2">Address</p>
         </a>
 
-        <a href="{{ about.facebook }}" class="btn btn-white">
-            <img class="mx-1" src="{% static 'main/icons/facebook.svg' %}" alt="Catalog Icon" width="30" height="30">
-            <p class="m-2">Facebook</p>
-        </a>
+{#        <a href="{{ about.facebook }}" class="btn btn-white">#}
+{#            <img class="mx-1" src="{% static 'main/icons/facebook.svg' %}" alt="Catalog Icon" width="30" height="30">#}
+{#            <p class="m-2">Facebook</p>#}
+{#        </a>#}
 
         <a href="mailto:{{ about.email }}" class="btn btn-white">
             <img class="mx-1" src="{% static 'main/icons/gmail.svg' %}" alt="Catalog Icon" width="30" height="30">

@@ -11,7 +11,7 @@ def index(request):
 
     context: dict = {
         'title': 'Home - Main',
-        'content': 'Furniture Store "AYLIN"',
+        'content': 'BNA',
     }
     return render(request, 'main/index.html', context)
 

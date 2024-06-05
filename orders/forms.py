@@ -28,12 +28,9 @@ class CreateOrderForm(forms.Form):
 
         data = self.cleaned_data['phone_number']
 
-        if not data.isdigit():
-            raise forms.ValidationError('Phone number must contain only digits')
-
-        pattern = re.compile(r'^\d{10}$')
+        pattern = re.compile(r'^(\+?\d{1,3})?\d{10,14}$')
         if not pattern.match(data):
-            raise forms.ValidationError('Phone number must contain 10 digits')
+            raise forms.ValidationError('f"{number} is not a valid phone number"')
 
         return data
 
